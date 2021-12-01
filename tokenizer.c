@@ -7,16 +7,17 @@
  *
  * Return: array of tokens
  */
-char **tokenizer(char string[])
+char **tokenizer(char string[], char *separator)
 {
 	int i;
-	//char str[1024] = "con mi kelly slate tamo bien";
 	char **tokens;
 	
 	//creates string array in heap to make a succesful return
 	tokens = malloc(sizeof(char *) * 1024);
+	for (i = 0; i < 1024; i++)
+		tokens[i] = malloc(sizeof(char) * 255);
 	i = 0;
-	tokens[i] = strtok(string, " ");
+	tokens[i] = strtok(string, separator);
 	if (!tokens[i])
 	{
 		printf("Error\n");
@@ -25,9 +26,7 @@ char **tokenizer(char string[])
 	while (tokens[i])
 	{
 		i++;
-		tokens[i] = strtok(NULL, " ");
-		if (!tokens[i])
-			break;
+		tokens[i] = strtok(NULL, separator);
 	}
 	return (tokens);
 }

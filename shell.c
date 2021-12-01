@@ -1,6 +1,6 @@
 #include "main.h"
 
-int main(void)
+int main(int argc char **argv, **env)
 {
 	char *buffer;
 	size_t bufsize = 1024;

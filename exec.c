@@ -7,8 +7,9 @@
  */
 int main(void)
 {
- char *argv[] = {"/bin/ls", "-l", "/usr/", NULL};
+ char *argv[] = {"/bin/sh", "cd", NULL};
  printf("Before execve\n");
+ execl("/bin/sh", "-c", "cd", "/", "/", (const char *)0);
  if (execve(argv[0], argv, NULL) == -1)
  {
  perror("Error:");
