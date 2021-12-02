@@ -35,4 +35,4 @@ Operating systems such as UNIX have
 a large variety of shell programs with different commands, syntax, and cap-  
 abilities, with the POSIX shell being a baseline.
 
-Authors © Joaquin Victoria, Salvador Diaz. 
+**Authors © Joaquin Victoria, Salvador Diaz.**
