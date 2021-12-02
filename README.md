@@ -1,7 +1,6 @@
-# README.md
+# README
 
-## What’s is a shell program and for what do you  
-## would use it?
+## What’s is a shell program and why you would use it?
 
 In computing, a shell is a computer program that exposes an operating  
 system’s services to a human user or other programs. In general, operating  
