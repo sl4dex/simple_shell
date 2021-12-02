@@ -1,32 +1,28 @@
 #include "main.h"
 
-/**
- * tokenizer - gets string from shell.c and separates each word into an array
- *		element.
- * @string: string to tokenize
- *
- * Return: array of tokens
- */
-char **tokenizer(char string[], char *separator)
+char **tokenizer(char *command, char *separator, char **list)
 {
-	int i;
-	char **tokens;
-	
-	//creates string array in heap to make a succesful return
-	tokens = malloc(sizeof(char *) * 1024);
-	for (i = 0; i < 1024; i++)
-		tokens[i] = malloc(sizeof(char) * 255);
-	i = 0;
-	tokens[i] = strtok(string, separator);
-	if (!tokens[i])
+	char *tkn;
+	int i = 0;
+
+	tkn = strtok(command, separator);
+	if (!tkn)
 	{
-		printf("Error\n");
-		return (NULL);
+		printf("No hubo input\n");
+		return(NULL);
 	}
-	while (tokens[i])
+	else
 	{
+		printf("Tkn = %s\n", tkn);
+		*(list + i) = tkn;
 		i++;
-		tokens[i] = strtok(NULL, separator);
 	}
-	return (tokens);
+	while (tkn)
+	{
+		tkn = strtok(NULL, separator);
+		printf("Tkn = %s\n", tkn);
+		*(list + i) = tkn;
+		i++;
+	}
+	return (list);
 }

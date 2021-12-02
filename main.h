@@ -12,10 +12,12 @@ typedef struct nodep
 	char *path;
 	struct nodep *next;
 } nodep;
-char **tokenizer(char *, char *);
+char **tokenizer(char *, char *, char **);
 char *strconcat(char *, char *);
 nodep *_getenv(const char *name);
 int get_path(char *);
 nodep *tokenLinked(char string[], char *separator);
 size_t prNodes(const nodep *h);
+int chkBuiltin(char **, char **);
+int _strcmp(char *, char *);
 #endif
