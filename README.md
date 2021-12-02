@@ -1,5 +1,7 @@
-A project to build a "simple" shell interpreter
-What’s is a shell program and for what do you would use it?
+# README.md
+
+## What’s is a shell program and for what do you  
+## would use it?
 
 In computing, a shell is a computer program that exposes an operating  
 system’s services to a human user or other programs. In general, operating  
@@ -33,4 +35,4 @@ Operating systems such as UNIX have
 a large variety of shell programs with different commands, syntax, and cap-  
 abilities, with the POSIX shell being a baseline.
 
-Authors © Joaquin Victoria, Salvador Diaz.
+Authors © Joaquin Victoria, Salvador Diaz. 
