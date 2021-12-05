@@ -5,7 +5,7 @@
  * @env: the current environment
  * Return: 1 if input is a builtin, 0 otherwise
  */
-int chkBuiltin(char **list, char **env)
+int chkBuiltin(char **list, char **env, char *buffer)
 {
 	int pid, status, i;
 
@@ -19,9 +19,8 @@ int chkBuiltin(char **list, char **env)
 	}
 	else if (_strcmp(list[0], "exit") == 0 && list[1] == NULL)
 	{
-			freezeLl(headEnv1);
-			freezeLl(headEnv2);
-			freezeBuff(headEnv1);
+			freezeBuff(buffer);
+			free(list);
 			exitpls();
 	}
 	return(0);

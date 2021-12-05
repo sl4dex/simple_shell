@@ -6,45 +6,45 @@
 	return (0);
 }
 */
-int get_path(char *word)
+int get_path(char **list)
 {
-	nodep *headEnv1, *headEnv2, *current;
-	char **list;
-	char *tok;
+	nodep *headEnv, *current;
+	char *tok, *envValue;
 	struct stat st;
 
-	printf("get_path() - buscando ruta...  ");
-	word = strconcat("/", word);
-	printf("get_path() - concatenando: %s\n", word);
+	printf("get_path() - buscando ruta...   ");
+	list[0] = strconcat("/", list[0]);
+	printf("get_path() - concatenando: %s\n", list[0]);
 	/*returns PATH env variable value*/
-	headEnv1 = _getenv("PATH=");
-	prNodes(headEnv1);
-	printf("linked1\n");
+	envValue = _getenv("PATH=");
+	printf("getenv returned: %s\n", envValue);
 	/*creates linkedlist of PATH routes*/
-	headEnv2 = tokenLinked2(headEnv1->path, ":");
-	printf("linked2\n");
-	prNodes(headEnv2);
+	headEnv = tokenLinked(envValue, ":");
+	printf("linkeando valores\n");
+	prNodes(headEnv);
 	printf("-------------------------------\n");
-	current = headEnv2;
+	current = headEnv;
 	while (current)
 	{
-		tok = strconcat(current->path, word);
+		tok = strconcat(current->path, list[0]);
 		if (stat(tok, &st) == 0)
 		{
-			printf("%s - existe arch\n", tok);
-			/*ejecutarlo y liberar*/
-			freezeLl(headEnv1);
-			freezeLl(headEnv2);
+			printf("get_path - %s : existe arch, cambiando comando por ruta\n", tok);
+			/*!!!!!!!!! free?? */
+			list[0] = tok;
+			printf("ruta appended en lista: %s\n", list[0]);
+			/*ejecutarlo*/
+			execution(list);
+			free(tok);
 			break;
 		}
 		else
 		{
-			printf("%s - NO existe arch\n", tok);
+			printf("get_path - %s : NO existe arch\n", tok);
 			current = current->next;
 		}
 	}
-	freezeLl(headEnv1);
-	freezeLl(headEnv2);
+	freezeLl(headEnv);
 	return (0);
 }
 /**
@@ -52,25 +52,35 @@ int get_path(char *word)
  * @name: name of env variable
  * Return: head of linked list
  */
-nodep *_getenv(const char *name)
+char *_getenv(const char *name)
 {
 	extern char **environ;
 	int i;
 	int match;
-	nodep *head;
+	char *envValue;
+	nodep *head, *tmp;
 
 	for (i = 0; environ[i] != 0; i++)
 	{
+		char *matchDup;
+
 		match = strncmp(environ[i], name, 5);
 		if (match == 0)
 		{
 			printf("match!\n");
-			head = tokenLinked(environ[i], "=");
+			matchDup = strdup(environ[i]);
+			head = tokenLinked(matchDup, "=");
 			if (head)
-				return (head->next);
+			{
+				tmp = head->next;
+				envValue = tmp->path;
+				freezeLl(head);
+				//free(matchDup);
+				return (envValue);
+			}
 		}
 	}
-	printf("Error\n");
+	printf("_getenv no hizo match\n");
 	return (NULL);
 }
 /**
