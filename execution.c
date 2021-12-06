@@ -13,7 +13,12 @@ int chkBuiltin(char **list, char **env, char *buffer)
 	printf("entre a builtin\n");
 	if (_strcmp(list[0], "env") == 0 && list[1] == NULL)
 	{
+		printf("es env\n");
 		for (i = 0; env[i]; i++)
+		{
+			write(1, env[i], _strlen(env[i]));
+			write(1, "\n", 1);
+		}
 		return (1);
 	}
 	else if (_strcmp(list[0], "exit") == 0 && list[1] == NULL)
@@ -32,8 +37,8 @@ int chkBuiltin(char **list, char **env, char *buffer)
  */
 int chkPath(char **list)
 {
-	if ((strncmp(list[0], "/", 1) == 0) ||
-		(strncmp(list[0], ".", 1) == 0))
+	if ((_strncmp(list[0], "/", 1) == 0) ||
+		(_strncmp(list[0], ".", 1) == 0))
 	{
 		execution(list);
 		return (1);
@@ -62,7 +67,7 @@ void execution(char **list)
  */
 void exitpls(void)
 {
-	exit();
+	exit(98);
 }
 /**
  * _strcmp - compares ASCII numeric value of two strings.

@@ -21,14 +21,17 @@ typedef struct nodep
 } nodep;
 char **tokenizer(char *, char *, char **);
 char *strconcat(char *, char *);
-char *_getenv(const char *, char **);
+char *_getenv(char *, char **);
 void get_path(char **, char **);
 nodep *tokenLinked(char string[], char *separator);
 size_t prNodes(const nodep *);
 int chkBuiltin(char **, char **, char *);
 int chkPath(char **);
 void execution(char **);
+int _strlen(char *);
+char *_strdup(char *);
 int _strcmp(char *, char *);
+int _strncmp(char *, char *, unsigned int);
 void exitpls(void);
 void freezeBuff(char *);
 void freezeLl(nodep *);

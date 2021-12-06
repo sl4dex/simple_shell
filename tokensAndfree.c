@@ -16,13 +16,16 @@ char **tokenizer(char *command, char *separator, char **list)
 	if (!tkn)
 		return (NULL);
 	list[i] = tkn;
+	printf("tkn[%d], : %s  ", i, tkn);
 	i++;
 	while (tkn)
 	{
 		tkn = strtok(NULL, separator);
 		list[i] = tkn;
+		printf("tkn[%d], : %s  ", i, tkn);
 		i++;
 	}
+	putchar(10);
 	return (list);
 }
 
@@ -42,7 +45,8 @@ nodep *tokenLinked(char *string, char *separator)
 		return (NULL);
 	nod = (nodep *)malloc(sizeof(nodep));
 	if (!nod)
-		exit();
+		exit(96);
+	printf("node - %s\n", tok);
 	nod->path = tok;
 	nod->next = NULL;
 	head = nod;
@@ -51,7 +55,10 @@ nodep *tokenLinked(char *string, char *separator)
 		tok = strtok(NULL, separator);
 		if (tok)
 		{
+			printf("node - %s\n", tok);
 			newnod = (nodep *)malloc(sizeof(nodep));
+			if (!newnod)
+				exit(96);
 			nod->next = newnod;
 			newnod->path = tok;
 			newnod->next = NULL;
