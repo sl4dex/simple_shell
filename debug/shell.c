@@ -1,10 +1,8 @@
 #include "main.h"
 /**
  * main - very simple shell c:
- * @argc: num of arguments
- * @argv: array of strings, each string is an argument
- * @env: array of strings, each string is an env variable
- * Return: Always 0
+ *
+ * Return:
  */
 int main(int argc, char **argv, char **env)
 {
@@ -17,7 +15,7 @@ int main(int argc, char **argv, char **env)
 	buffer = malloc(bufsize);
 	list = malloc(1024 * sizeof(char *));
 	if (!buffer)
-		return (-1);
+		return(-1);
 	while (1)
 	{
 		success = 0;
@@ -26,21 +24,26 @@ int main(int argc, char **argv, char **env)
 		if (chars == 1)
 			continue;
 		buffer[chars - 1] = 0;
+		printf("--*-----*------*-----*---\nel input fue: %s\n", buffer);
 		list = tokenizer(buffer, " ", list);
+		/*checkear si es builtin, o si tiene ruta, o si hay que buscarla*/
 		success = chkBuiltin(list, env, buffer);
 		if (success == 1)
 			continue;
+		printf("no es builtin.\n");
 		success = chkPath(list);
 		if (success == 1)
 			continue;
-		get_path(list, env);
+		printf("no hay path predefinido.\n");
+		get_path(list);
 	}
 	freezeBuff(buffer);
 	free(list);
-	return (0);
+	printf("chau c:\n");
+	return 0;
 }
 /**
- * strconcat - concatenates two strings.
+ * str_concat - concatenates two strings.
  * @s1: first string
  * @s2: second string
  *

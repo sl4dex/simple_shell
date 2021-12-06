@@ -3,7 +3,6 @@
  * chkBuiltin - checks if input is a builtin
  * @list: array of strings with the input
  * @env: the current environment
- * @buffer: buffer with user input
  * Return: 1 if input is a builtin, 0 otherwise
  */
 int chkBuiltin(char **list, char **env, char *buffer)
@@ -13,16 +12,18 @@ int chkBuiltin(char **list, char **env, char *buffer)
 	printf("entre a builtin\n");
 	if (_strcmp(list[0], "env") == 0 && list[1] == NULL)
 	{
+		printf("ejecutando...\n");
 		for (i = 0; env[i]; i++)
+			printf("%s\n", env[i]);
 		return (1);
 	}
 	else if (_strcmp(list[0], "exit") == 0 && list[1] == NULL)
 	{
-		freezeBuff(buffer);
-		free(list);
-		exitpls();
+			freezeBuff(buffer);
+			free(list);
+			exitpls();
 	}
-	return (0);
+	return(0);
 }
 /**
  * chkPath - checks if input already has a path
@@ -32,18 +33,23 @@ int chkBuiltin(char **list, char **env, char *buffer)
  */
 int chkPath(char **list)
 {
-	if ((strncmp(list[0], "/", 1) == 0) ||
-		(strncmp(list[0], ".", 1) == 0))
-	{
-		execution(list);
-		return (1);
-	}
-	else
-		return (0);
+		printf("chequeando ruta\n");
+		if ((strncmp(list[0], "/", 1) == 0) ||
+			(strncmp(list[0], ".", 1) == 0))
+		{
+			printf("tiene ruta\n");
+			execution(list);
+			return (1);
+		}
+		else
+		{
+			printf("no tiene ruta?\n");
+			return (0);
+		}
 }
 /**
- * execution - executes checked user input
- * @list: list of tokenized user input
+ * execution -
+ * @list:
  */
 void execution(char **list)
 {
@@ -58,11 +64,15 @@ void execution(char **list)
 	wait(&status);
 }
 /**
- * exitpls - exits program
+ * exitpls -
+ * @
  */
 void exitpls(void)
 {
-	exit();
+	/*
+	   free...
+	*/
+	exit(98);
 }
 /**
  * _strcmp - compares ASCII numeric value of two strings.

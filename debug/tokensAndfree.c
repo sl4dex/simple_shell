@@ -1,11 +1,10 @@
 #include "main.h"
 /**
- * tokenizer - tokenizes string, creating an array of strings
- * @command: string to be tokenized
- * @separator: indicated delimiter
- * @list: array of strings that will contain the tokens
- *
- * Return: tokenized array of strings
+ *tokenizer -
+ * @command
+ * @
+ * @
+ * Return: .
  */
 char **tokenizer(char *command, char *separator, char **list)
 {
@@ -14,13 +13,21 @@ char **tokenizer(char *command, char *separator, char **list)
 
 	tkn = strtok(command, separator);
 	if (!tkn)
-		return (NULL);
-	list[i] = tkn;
-	i++;
+	{
+		printf("No hubo input\n");
+		return(NULL);
+	}
+	else
+	{
+		printf("Tkn = %s\n", tkn);
+		*(list + i) = tkn;
+		i++;
+	}
 	while (tkn)
 	{
 		tkn = strtok(NULL, separator);
-		list[i] = tkn;
+		printf("Tkn = %s\n", tkn);
+		*(list + i) = tkn;
 		i++;
 	}
 	return (list);
@@ -42,7 +49,7 @@ nodep *tokenLinked(char *string, char *separator)
 		return (NULL);
 	nod = (nodep *)malloc(sizeof(nodep));
 	if (!nod)
-		exit();
+		printf("malloc de nodo fallo\n");
 	nod->path = tok;
 	nod->next = NULL;
 	head = nod;
@@ -61,9 +68,9 @@ nodep *tokenLinked(char *string, char *separator)
 	return (head);
 }
 /**
- * prNodes - prints nodes in current list
- * @h: head of linked list
- * Return: number of elements in linked list
+ * prNodes - 
+ * @h:
+ * Return: .
  */
 size_t prNodes(const nodep *h)
 {
@@ -72,7 +79,6 @@ size_t prNodes(const nodep *h)
 	if (h)
 	{
 		elem++;
-		/*TROUBLE! !!!!!!!!!!!!!!!!!*/
 		printf("%s\n", h->path);
 		if (h->next)
 			elem += prNodes(h->next);
@@ -80,8 +86,8 @@ size_t prNodes(const nodep *h)
 	return (elem);
 }
 /**
-  * freezeLl - frees nodep format linked list
-  * @head: head of the linked list
+  * freezeLl - frees nodep format node's list
+  * @pathLink: the linked list
   */
 void freezeLl(nodep *head)
 {
@@ -89,10 +95,14 @@ void freezeLl(nodep *head)
 
 	while (head)
 	{
+		printf("free - soy %s\n", head->path);
 		tmp = head;
 		head = head->next;
+		//printf("free - me movi al siguiente, soy %s\n", head->path);
+		//free(tmp->path);
 		free(tmp);
 	}
+	printf("free - saliendo\n");
 }
 
 /**
