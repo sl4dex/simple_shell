@@ -7,15 +7,16 @@
 void get_path(char **list, char **env)
 {
 	nodep *headEnv, *current;
-	char *tok, *envValue, *aux;
+	char *tok, *envValue, *dupenv, *aux;
 	struct stat st;
 
 	aux = strconcat("/", list[0]);
 		printf("concatene %s\n", aux);
 	list[0] = aux;
 	envValue = _getenv("PATH=", env);
-		printf("_getenv returned : %s\n", envValue);
-	headEnv = tokenLinked(envValue, ":");
+	dupenv = _strdup(envValue);
+	printf("_getenv returned : %s\n", envValue);
+	headEnv = tokenLinked(dupenv, ":");
 	prNodes(headEnv);
 	current = headEnv;
 	while (current)
@@ -34,6 +35,7 @@ void get_path(char **list, char **env)
 			current = current->next;
 		free(tok);
 	}
+	free(dupenv);
 	free(aux);
 	freezeLl(headEnv);
 }
@@ -45,29 +47,17 @@ void get_path(char **list, char **env)
  */
 char *_getenv(char *name, char **env)
 {
-	int i;
-	int match;
-	char *envValue, *matchDup;
-	nodep *head, *tmp;
+	int i, match;
 
+	/* only works with PATH env variable */
 	for (i = 0; env[i] != 0; i++)
 	{
+		/* _strlen(PATH=) == 5 (0 to 4) */
 		match = _strncmp(env[i], name, 5);
 		if (match == 0)
 		{
-			printf("_getenv - match!\n");
-			matchDup = _strdup(env[i]);
-			head = tokenLinked(matchDup, "=");
-			if (head)
-			{
-				tmp = head->next;
-				envValue = tmp->path;
-				printf("ENVVALUE - %s\n", envValue);
-				freezeLl(head);
-				//free(matchDup);
-				return (envValue);
-			}
-			free(matchDup);
+			printf("_getenv - match! %s\n", env[i] + 5);
+			return (env[i] + 5);
 		}
 	}
 	return (NULL);

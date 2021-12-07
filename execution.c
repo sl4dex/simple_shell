@@ -8,7 +8,7 @@
  */
 int chkBuiltin(char **list, char **env, char *buffer)
 {
-	int pid, status, i;
+	int i;
 
 	printf("entre a builtin\n");
 	if (_strcmp(list[0], "env") == 0 && list[1] == NULL)

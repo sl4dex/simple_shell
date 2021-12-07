@@ -1,4 +1,5 @@
 #include "main.h"
+#define UNUSED __attribute__((__unused__))
 /**
  * main - very simple shell c:
  * @argc: num of arguments
@@ -6,13 +7,12 @@
  * @env: array of strings, each string is an env variable
  * Return: Always 0
  */
-int main(int argc, char **argv, char **env)
+int main(UNUSED int argc, UNUSED char **argv, char **env)
 {
 	char *buffer, **list;
 	size_t bufsize = 1024;
 	ssize_t chars;
-	int status, success;
-	pid_t pd;
+	int success;
 
 	buffer = malloc(bufsize);
 	list = malloc(1024 * sizeof(char *));
@@ -22,22 +22,25 @@ int main(int argc, char **argv, char **env)
 	while (1)
 	{
 		success = 0;
-		printf("  -> ");
+		if (isatty(1) == 1)
+		write(1, "  -> ", 4);
 		chars = getline(&buffer, &bufsize, stdin);
 		printf("chars %ld\n", chars);
 		if (chars == 1)
-			continue;
+		continue;
 		if (chars == -1)
-			break;
+		break;
 		buffer[chars - 1] = 0;
 		list = tokenizer(buffer, " ", list);
 		success = chkBuiltin(list, env, buffer);
 		if (success == 1)
-			continue;
+		continue;
 		success = chkPath(list);
 		if (success == 1)
-			continue;
+		continue;
 		get_path(list, env);
+		if (isatty(1) == 0)
+		break;
 	}
 	freezeBuff(buffer);
 	free(list);
