@@ -4,28 +4,25 @@
  * @list: tokenized list of user input
  * @env: array of strings with env variables
  */
-void get_path(char **list, char **env)
+void get_path(char **list, char **argv, char **env)
 {
 	nodep *headEnv, *current;
 	char *tok, *envValue, *dupenv, *aux;
 	struct stat st;
+	int found = 0;
 
 	aux = strconcat("/", list[0]);
-		printf("concatene %s\n", aux);
 	list[0] = aux;
 	envValue = _getenv("PATH=", env);
 	dupenv = _strdup(envValue);
-	printf("_getenv returned : %s\n", envValue);
 	headEnv = tokenLinked(dupenv, ":");
-	prNodes(headEnv);
 	current = headEnv;
 	while (current)
 	{
 		tok = strconcat(current->path, list[0]);
-		printf("concatene %s\n", tok);
 		if (stat(tok, &st) == 0)
 		{
-			printf("existe %s\n", tok);
+			found = 1;
 			list[0] = tok;
 			execution(list);
 			free(tok);
@@ -35,6 +32,8 @@ void get_path(char **list, char **env)
 			current = current->next;
 		free(tok);
 	}
+	if (found == 0)
+		perror(argv[0]);
 	free(dupenv);
 	free(aux);
 	freezeLl(headEnv);
@@ -56,7 +55,6 @@ char *_getenv(char *name, char **env)
 		match = _strncmp(env[i], name, 5);
 		if (match == 0)
 		{
-			printf("_getenv - match! %s\n", env[i] + 5);
 			return (env[i] + 5);
 		}
 	}

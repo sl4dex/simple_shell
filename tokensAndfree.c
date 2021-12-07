@@ -16,16 +16,13 @@ char **tokenizer(char *command, char *separator, char **list)
 	if (!tkn)
 		return (NULL);
 	list[i] = tkn;
-	printf("tkn[%d], : %s  ", i, tkn);
 	i++;
 	while (tkn)
 	{
 		tkn = strtok(NULL, separator);
 		list[i] = tkn;
-		printf("tkn[%d], : %s  ", i, tkn);
 		i++;
 	}
-	putchar(10);
 	return (list);
 }
 
@@ -46,7 +43,6 @@ nodep *tokenLinked(char *string, char *separator)
 	nod = (nodep *)malloc(sizeof(nodep));
 	if (!nod)
 		exit(96);
-	printf("node - %s\n", tok);
 	nod->path = tok;
 	nod->next = NULL;
 	head = nod;
@@ -55,7 +51,6 @@ nodep *tokenLinked(char *string, char *separator)
 		tok = strtok(NULL, separator);
 		if (tok)
 		{
-			printf("node - %s\n", tok);
 			newnod = (nodep *)malloc(sizeof(nodep));
 			if (!newnod)
 				exit(96);
@@ -67,25 +62,7 @@ nodep *tokenLinked(char *string, char *separator)
 	}
 	return (head);
 }
-/**
- * prNodes - prints nodes in current list
- * @h: head of linked list
- * Return: number of elements in linked list
- */
-size_t prNodes(const nodep *h)
-{
-	int elem = 0;
 
-	if (h)
-	{
-		elem++;
-		/*TROUBLE! !!!!!!!!!!!!!!!!!*/
-		printf("%s\n", h->path);
-		if (h->next)
-			elem += prNodes(h->next);
-	}
-	return (elem);
-}
 /**
   * freezeLl - frees nodep format linked list
   * @head: head of the linked list

@@ -7,7 +7,7 @@
  * @env: array of strings, each string is an env variable
  * Return: Always 0
  */
-int main(UNUSED int argc, UNUSED char **argv, char **env)
+int main(UNUSED int argc, char **argv, char **env)
 {
 	char *buffer, **list;
 	size_t bufsize = 1024;
@@ -23,22 +23,21 @@ int main(UNUSED int argc, UNUSED char **argv, char **env)
 	{
 		success = 0;
 		if (isatty(1) == 1)
-		write(1, "  -> ", 4);
+		write(1, "  -> ", 5);
 		chars = getline(&buffer, &bufsize, stdin);
-		printf("chars %ld\n", chars);
 		if (chars == 1)
 		continue;
 		if (chars == -1)
 		break;
 		buffer[chars - 1] = 0;
-		list = tokenizer(buffer, " ", list);
+		list = tokenizer(buffer, "\n \t", list);
 		success = chkBuiltin(list, env, buffer);
 		if (success == 1)
 		continue;
 		success = chkPath(list);
 		if (success == 1)
 		continue;
-		get_path(list, env);
+		get_path(list, argv, env);
 		if (isatty(1) == 0)
 		break;
 	}

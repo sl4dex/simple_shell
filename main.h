@@ -22,9 +22,8 @@ typedef struct nodep
 char **tokenizer(char *, char *, char **);
 char *strconcat(char *, char *);
 char *_getenv(char *, char **);
-void get_path(char **, char **);
+void get_path(char **, char **, char **);
 nodep *tokenLinked(char string[], char *separator);
-size_t prNodes(const nodep *);
 int chkBuiltin(char **, char **, char *);
 int chkPath(char **);
 void execution(char **);

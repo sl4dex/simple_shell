@@ -10,10 +10,8 @@ int chkBuiltin(char **list, char **env, char *buffer)
 {
 	int i;
 
-	printf("entre a builtin\n");
 	if (_strcmp(list[0], "env") == 0 && list[1] == NULL)
 	{
-		printf("es env\n");
 		for (i = 0; env[i]; i++)
 		{
 			write(1, env[i], _strlen(env[i]));
