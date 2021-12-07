@@ -1,37 +1,50 @@
-# README
+# Simple Shell
 
-## What’s is a shell program and why you would use it?
+### What is a shell program and why would you use it?
 
-In computing, a shell is a computer program that exposes an operating  
-system’s services to a human user or other programs. In general, operating  
-system shells use either a command-line interface (CLI) or graphical user  
-interface (GUI), depending on a computer's role and particular operation.  
-It is named a shell because it is the outermost layer around the operating   
-system.
+The shell is a computer program that serves as an intermediary between  
+the operating system and the human user or other programs. In general,
+operating  system shells use either a command-line interface (CLI) or
+graphical user  interface (GUI).
+It is named Shell because it is the outermost layer around the operating   
+system. In this case, our shell is only used through the Command-line
+interface (CLI)
 
-In this case, our shell is only used through the Command-line interface (CLI),  
-because this is the most popular use for computing science’s operations.
+### Compilation
+To compile the current files to generate a functioning executable, you'll need
+the files:
+- shell.c
+- get_path.c
+- tokensAndfree.c
+- execution.c
 
+joining them together with the gcc program and its respective warnings
+
+`gcc -g -Wall -Werror -Wextra -pedantic -std=gnu89 -o excutableName`
+### Commands
 Command-line shells require the user to be familiar with commands and  
 their calling syntax and to understand concepts about the shell-specific  
 scripting language (for example, bash).
 
-Operating systems provide various services to their users, including file  
-management, process management (running and terminating applications),  
-batch processing, and operating system monitoring and configuration.
-
-All these services are possible because the shells count with command lines  
-which you gonna use to manipulate and manage different  computer's com-  
-ponents, as can be the Random Access Memory (RAM), the Hard Disk, etc. All  
-this is through your system operator as we said previously.
-
-### Command-line interface
-
-A command-line interface (CLI) is an operating system shell that uses  alpha-  
-numeric characters typed on a keyboard to provide instructions and data  
-to the operating system, interactively.
-Operating systems such as UNIX have  
-a large variety of shell programs with different commands, syntax, and cap-  
-abilities, with the POSIX shell being a baseline.
-
+To use the Command-line, simply start the shell executable and type in the
+command that you want to use, for example:
+``` 
+root@9500cff7c6d4:~/shell# ./execName
+-> ls 
+ATHORS debug execution.c get_path.c README.md main.h ...
+->
+```
+to exit interactive mode, just type exit, or ctrl + D
+``` 
+root@9500cff7c6d4:~/shell# ./execName
+-> exit
+root@9500cff7c6d4:~/shell#
+```
+You can use the non-interactive mode also, using the shell without entering
+the terminal:
+````
+root@9500cff7c6d4:~/shell# echo "ls" | ./execName
+ATHORS debug execution.c get_path.c README.md main.h ...
+root@9500cff7c6d4:~/shell#
+````
 **Authors © Joaquin Victoria, Salvador Diaz.**
