@@ -1,0 +1,88 @@
+.TH simple_shell 1 "December 8, 2021" "1.0" "simple_shell General Commands Manual"
+
+.SH NAME
+.B simple_shell
+- standard command language interpreter
+
+.SH SYNOPSIS
+
+.B simple_shell
+.RB [|options|]
+.RB [|file|]
+
+.SH DESCRIPTION
+
+.B simple_shell
+The simple_shell utility is a command language interpreter that shall execute commands read from a command line string, the standard input, or a specified file. 
+
+.SH OPERANDS
+
+.TP
+The following operands shall be supported:
+
+-                A single <hyphen-minus> shall be treated as the first
+                 operand and then ignored. If both '-' and "--" are
+                 given as arguments, or if other operands precede the
+                 single <hyphen-minus>, the results are undefined.
+
+.TP
+
+- argument: The positional parameters shall be set to arguments.
+
+.TP
+
+- command_file:  The pathname of a file containing commands. If the
+                 pathname contains one or more <slash> characters, the
+                 implementation attempts to read that file; the file
+                 need not be executable. If the pathname does not
+                 contain a <slash> character:
+
+		 *   The implementation shall attempt to read that file
+                     from the current working directory; the file need
+                     not be executable.
+
+		 *   If the file is not in the current working
+                     directory, the implementation may perform a search
+                     for an executable file using the value of PATH.
+
+.SH INVOCATION 
+
+.TP
+Compile simple_shell with the GNU Compiler Collection, using gcc and the warnings.
+.B gcc -Wall -Werror -Wextra -pedantic *.c -o simple_shell
+
+.SH EXAMPLES
+
+.RS 1.2i
+.PP
+.I EXAMPLE 1
+.B -
+Run interactive mode, ./simple_shell
+.PP
+.I EXAMPLE 2
+.B -
+Run non-interactive mode, echo "ls" | ./simple_shell
+.RE
+
+.RS 1.2i
+
+
+.SH BUILTINS
+.br
+exit - exit the shell
+.br
+env - prints the environment variables
+.br
+
+.SH RETURN VALUE
+.br
+Return 0 on success, otherwise return the exit value.
+.br
+
+.SH AUTHOR
+.br
+
+Salvador Diaz <3940@holbertonschool.com>
+.br
+Joaquin Victoria <3942@holbertonschool.com> 
+.br
