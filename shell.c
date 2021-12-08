@@ -28,10 +28,7 @@ int main(UNUSED int argc, char **argv, char **env)
 		if (chars == 1)
 		continue;
 		if (chars == -1)
-		{
-			write(1, "\n", 1);
 			break;
-		}
 		buffer[chars - 1] = 0;
 		list = tokenizer(buffer, "\n \t", list);
 		success = chkBuiltin(list, env, buffer);
