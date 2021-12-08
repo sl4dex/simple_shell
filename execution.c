@@ -29,16 +29,16 @@ int chkBuiltin(char **list, char **env, char *buffer)
 }
 /**
  * chkPath - checks if input already has a path
- * @list:
- *
+ * @list: array of tokenized user input
+ * @argv: array of argument strings
  * Return: 1 if input already has a path, 0 otherwise
  */
-int chkPath(char **list)
+int chkPath(char **list, char **argv)
 {
 	if ((_strncmp(list[0], "/", 1) == 0) ||
 		(_strncmp(list[0], ".", 1) == 0))
 	{
-		execution(list);
+		execution(list, argv);
 		return (1);
 	}
 	else
@@ -47,8 +47,9 @@ int chkPath(char **list)
 /**
  * execution - executes checked user input
  * @list: list of tokenized user input
+ * @argv: array of argument strings
  */
-void execution(char **list)
+void execution(char **list, char **argv)
 {
 	int status, pd;
 
@@ -56,7 +57,7 @@ void execution(char **list)
 	if (pd == 0)
 	{
 		if (execve(list[0], list, NULL) == -1)
-			perror("Error");
+			perror(argv[0]);
 	}
 	wait(&status);
 }

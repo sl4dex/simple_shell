@@ -34,7 +34,7 @@ int main(UNUSED int argc, char **argv, char **env)
 		success = chkBuiltin(list, env, buffer);
 		if (success == 1)
 		continue;
-		success = chkPath(list);
+		success = chkPath(list, argv);
 		if (success == 1)
 		continue;
 		get_path(list, argv, env);

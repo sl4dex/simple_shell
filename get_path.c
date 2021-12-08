@@ -31,7 +31,7 @@ void get_path(char **list, char **argv, char **env)
 		{
 			found = 1;
 			list[0] = tok;
-			execution(list);
+			execution(list, argv);
 			free(tok);
 			break;
 		}
