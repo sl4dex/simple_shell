@@ -41,7 +41,7 @@ int main(UNUSED int argc, char **argv, char **env)
 		if (isatty(1) == 0)
 		break;
 	}
-	freezeBuff(buffer);
+	free(buffer);
 	free(list);
 	return (0);
 }

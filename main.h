@@ -32,6 +32,5 @@ char *_strdup(char *);
 int _strcmp(char *, char *);
 int _strncmp(char *, char *, unsigned int);
 void exitpls(void);
-void freezeBuff(char *);
 void freezeLl(nodep *);
 #endif

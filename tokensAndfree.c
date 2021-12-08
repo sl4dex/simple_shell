@@ -78,12 +78,3 @@ void freezeLl(nodep *head)
 		free(tmp);
 	}
 }
-
-/**
- * freezeBuff - frees input lines saved in getline
- * @str: the input obtained with getline
- */
-void freezeBuff(char *str)
-{
-	free(str);
-}

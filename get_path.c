@@ -2,6 +2,7 @@
 /**
  * get_path - gets path of user input
  * @list: tokenized list of user input
+ * @argv: list of arguments in main function
  * @env: array of strings with env variables
  */
 void get_path(char **list, char **argv, char **env)
@@ -11,15 +12,21 @@ void get_path(char **list, char **argv, char **env)
 	struct stat st;
 	int found = 0;
 
+	/* concatenates / to the command */
 	aux = strconcat("/", list[0]);
 	list[0] = aux;
+	/* gets PATH env variable (the value before "=") */
 	envValue = _getenv("PATH=", env);
 	dupenv = _strdup(envValue);
+	/*tokenizes PATH env value, creating a linked list with each path*/
 	headEnv = tokenLinked(dupenv, ":");
 	current = headEnv;
+	/* while node exists*/
 	while (current)
 	{
+		/* adds "/command" to each path */
 		tok = strconcat(current->path, list[0]);
+		/* if the file in that path exists */
 		if (stat(tok, &st) == 0)
 		{
 			found = 1;
