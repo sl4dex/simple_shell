@@ -21,7 +21,7 @@ int chkBuiltin(char **list, char **env, char *buffer)
 	}
 	else if (_strcmp(list[0], "exit") == 0 && list[1] == NULL)
 	{
-		freezeBuff(buffer);
+		free(buffer);
 		free(list);
 		exitpls();
 	}
