@@ -1,5 +1,4 @@
 #include "main.h"
-#define UNUSED __attribute__((__unused__))
 /**
  * chkBuiltin - checks if input is a builtin
  * @list: array of strings with the input
@@ -37,8 +36,7 @@ int chkBuiltin(char **list, char **env, char *buffer)
 int chkPath(char **list, char **argv)
 {
 	if ((_strncmp(list[0], "/", 1) == 0) ||
-	(_strncmp(list[0], "./", 2) == 0) ||
-	(_strncmp(list[0], "../", 3) == 0))
+		(_strncmp(list[0], ".", 1) == 0))
 	{
 		execution(list, argv);
 		return (1);
@@ -51,14 +49,15 @@ int chkPath(char **list, char **argv)
  * @list: list of tokenized user input
  * @argv: array of argument strings
  */
-void execution(char **list, UNUSED char **argv)
+void execution(char **list, char **argv)
 {
 	int status, pd;
 
 	pd = fork();
 	if (pd == 0)
 	{
-		execve(list[0], list, NULL);
+		if (execve(list[0], list, NULL) == -1)
+			perror(argv[0]);
 	}
 	wait(&status);
 }
