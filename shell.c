@@ -22,8 +22,8 @@ int main(UNUSED int argc, char **argv, char **env)
 	while (1)
 	{
 		success = 0;
-		if (isatty(1) == 1)
-		write(1, "  -> ", 5);
+		if (isatty(STDIN_FILENO) == 1)
+			write(1, "  -> ", 5);
 		chars = getline(&buffer, &bufsize, stdin);
 		if (chars == 1)
 		continue;
@@ -38,7 +38,7 @@ int main(UNUSED int argc, char **argv, char **env)
 		if (success == 1)
 		continue;
 		get_path(list, argv, env);
-		if (isatty(1) == 0)
+		if (isatty(STDIN_FILENO) == 0)
 		break;
 	}
 	free(buffer);
